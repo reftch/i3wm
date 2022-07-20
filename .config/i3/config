@@ -8,8 +8,43 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #282A36
+
+#bar {
+#  colors {
+#    background #282A36
+#    statusline #F8F8F2
+#    separator  #44475A
+
+#    focused_workspace  #44475A #44475A #F8F8F2
+#    active_workspace   #282A36 #44475A #F8F8F2
+#    inactive_workspace #282A36 #282A36 #BFBFBF
+#    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+#    binding_mode       #FF5555 #FF5555 #F8F8F2
+#  }
+#}
+
+# Setting monitor parameters
+exec_always --no-startup-id $HOME/.config/i3/monitor.sh
+#exec "xrandr --output DP-1-1 --mode 3840x2160 --primary --output eDP-1 --off"
+
 exec_always --no-startup-id picom &
 exec_always nitrogen --restore &
+
+# Keyboard settings
+exec_always "setxkbmap -layout de"
+exec_always xset r rate 200 25
+
+# Polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
 
 set $mod Mod4
 
@@ -204,18 +239,6 @@ bindsym $mod+r mode "resize"
 #	position top
 #}
 
-# Display configuration
-# exec_always xrandr --output Virtual-1 --mode 1920x1080
-#exec_always xrandr --output Virtual-1 --mode 3840x2160 
-
-exec_always "setxkbmap -layout de"
-# exec_always feh --bg-scale /home/tch/Pictures/wallpapers/Mirror_by_Uday_Nakade.jpg
-
-exec_always xset r rate 200 25
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-exec_always --no-startup-id $HOME/.config/i3/monitor.sh
-#exec "xrandr --output DP-1-1 --mode 3840x2160 --primary --output eDP-1 --off"
-
+# Locking screen
 bindsym $mod+l exec --no-startup-id sh $HOME/.config/i3/lock.sh lock
 
