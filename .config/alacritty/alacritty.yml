@@ -1,0 +1,49 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+window:
+  # Window dimensions (changes require restart)
+  padding:
+    x: 10
+    y: 5
+  decorations: full
+  opacity: 1.0
+  dimensions:
+    columns: 230
+    lines: 60
+
+# Font configuration
+font:
+  size: 10
+
+# Colors (Nord)
+colors:
+  # Default colors
+  primary:
+    background: '0x2E3440'
+    foreground: '0xD8DEE9'
+
+  # Normal colors
+  normal:
+    black:   '0x3B4252'
+    red:     '0xBF616A'
+    green:   '0xA3BE8C'
+    yellow:  '0xEBCB8B'
+    blue:    '0x81A1C1'
+    magenta: '0xB48EAD'
+    cyan:    '0x88C0D0'
+    white:   '0xE5E9F0'
+
+cursor:
+  style:
+    shape: Beam
+  vi_mode_style: Underline
+  thickness: 0.25
+
+# Live config reload (changes require restart)
+live_config_reload: true
+
+key_bindings:
+  - { key: N,              mods: Shift|Control,                action: SpawnNewInstance      }
+  - { key: Space,          mods: Control, mode: ~Search,       action: ToggleViMode          }
+  - { key: Return,         mods: Alt,                          action: ToggleFullScreen      }
+
+
