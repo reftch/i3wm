@@ -8,6 +8,12 @@ polybar-msg cmd quit
 
 # Launch bar1 and bar2
 echo "---" | tee -a /tmp/polybar1.log /tmp/polybar2.log
-polybar mybar 2>&1 | tee -a /tmp/polybar1.log & disown
 
+# polybar builtin 2>&1 | tee -a /tmp/polybar1.log & disown
+
+if [[ $(xrandr -q | grep 'DP-1-1 connected') ]]; then
+  polybar external 2>&1 | tee -a /tmp/polybar1.log & disown  
+else
+  polybar builtin 2>&1 | tee -a /tmp/polybar1.log & disown
+fi
 echo "Bars launched..."

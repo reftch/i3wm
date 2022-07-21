@@ -17,15 +17,6 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
 client.background       #282A36
 
-# Setting monitor parameters
-exec_always --no-startup-id $HOME/.config/i3/monitor.sh
-
-# Compositor window
-exec_always --no-startup-id picom &
-
-# Wallpapers
-exec_always nitrogen --restore &
-
 # Keyboard settings
 exec_always "setxkbmap -layout de"
 exec_always xset r rate 200 25
@@ -57,10 +48,10 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 000000 --nofork
 
 # Locking screen by shortcut
-bindsym $mod+l exec --no-startup-id sh $HOME/.config/i3/lock.sh lock
+bindsym $mod+l exec --no-startup-id i3lock -c 000000
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -72,6 +63,9 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+bindsym XF86MonBrightnessUp exec --no-startup-id $HOME/.config/i3/brightness.sh + eDP-1 && $refresh_i3status
+bindsym XF86MonBrightnessDown exec --no-startup-id $HOME/.config/i3/brightness.sh - eDP-1 && $refresh_i3status 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -217,4 +211,15 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+# Simulate ctrl+v upon pressing $mod+x
+# bindsym --release $mod+x exec --no-startup-id xdotool key --clearmodifiers ctrl+v
+
+# Take a screenshot upon pressing $mod+x (select an area)
+bindsym --release $mod+x exec --no-startup-id import ~/Pictures/screenshots/screenshot-$(date +%d-%b-%Y_%H-%M-%S).png
+
+for_window [title="^zoom$"] floating enable
+for_window [title="^Settings$"] floating enable
+for_window [title="^rocketchat.compart.com$"] floating enable
+for_window [title=".*Visual Studio Code$"] floating enable
 
