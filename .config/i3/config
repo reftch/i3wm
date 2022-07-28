@@ -15,11 +15,14 @@ client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
+#exec_always --no-startup-id picom
+#exec_always --no-startup-id nitrogen --restore
+
 client.background       #282A36
 
 # Keyboard settings
 exec_always "setxkbmap -layout de"
-exec_always xset r rate 200 25
+exec_always "xset r rate 200 25"
 
 # Polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -219,7 +222,9 @@ bindsym $mod+r mode "resize"
 bindsym --release $mod+x exec --no-startup-id import ~/Pictures/screenshots/screenshot-$(date +%d-%b-%Y_%H-%M-%S).png
 
 for_window [title="^zoom$"] floating enable
+for_window [title=".*Zoom Meeting$"] floating enable
 for_window [title="^Settings$"] floating enable
-for_window [title="^rocketchat.compart.com$"] floating enable
-for_window [title=".*Visual Studio Code$"] floating enable
+# for_window [title="^rocketchat.compart.com$"] floating enable
+# for_window [title=".*Visual Studio Code$"] floating enable
+for_window [title="app$"] floating enable
 
