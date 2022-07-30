@@ -77,7 +77,7 @@
     separator_height = 2
 
     # Padding between text and separator.
-    padding = 6
+    padding = 8
 
     # Horizontal padding.
     horizontal_padding = 6
@@ -87,10 +87,10 @@
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 0
+    frame_width = 2
 
     # Defines color of the frame around the notification window.
-    frame_color = "#aaaaaa"
+    frame_color = "#444444"
 
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
@@ -213,7 +213,7 @@
 
     # Paths to default icons (only neccesary when not using recursive icon lookup)
 		# icon_path = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/:/usr/share/icons/Adwaita/16x16/legacy/	
-		icon_path = /home/tch/.config/dunsts/icons/svg/status/
+		icon_path = /home/tch/.config/dunst/icons/svg/status/
 
     ### History ###
 
