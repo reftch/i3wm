@@ -19,14 +19,10 @@ client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
-#exec_always --no-startup-id picom
-#exec_always --no-startup-id nitrogen --restore
-
 client.background       #282A36
 
-# Keyboard settings
-# exec_always setxkbmap -layout de
-# exec_always xset r rate 200 25
+# Autotiling
+exec_always --no-startup-id autotiling
 
 # Polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -35,7 +31,9 @@ set $mod Mod4
 
 for_window [class=".*"] border pixel 0
 gaps inner 5
+#smart_gaps on
 #gaps inner all set 20
+
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -70,13 +68,16 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/.config/i3/volumechange.sh up && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/.config/i3/volumechange.sh down && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id $HOME/.config/i3/volumechange.sh mute && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
-bindsym XF86MonBrightnessUp exec --no-startup-id $HOME/.config/i3/brightness.sh + eDP-1 && $refresh_i3status
-bindsym XF86MonBrightnessDown exec --no-startup-id $HOME/.config/i3/brightness.sh - eDP-1 && $refresh_i3status 
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5% && $refresh_i3status
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%- && $refresh_i3status 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
