@@ -1,11 +1,11 @@
 #!/bin(sh
 
-chosen=$(printf "Logout\nPower off\nRestart\nLock" | rofi -dmenu -i -theme-str '@import "power.rasi"')
+chosen=$(printf "Lock\nLogout\nRestart\nPower off\n" | rofi -dmenu -i -theme-str '@import "power.rasi"')
 
 case "$chosen" in
-  "Logout") i3-msg exit ;; 
-  "Power off") poweroff ;;
-  "Restart") reboot ;;
   "Lock") i3lock -c 000000 ;;
+  "Logout") i3-msg exit ;; 
+  "Restart") reboot ;;
+  "Power off") poweroff ;;
   *) exit 1 ;;
 esac  
