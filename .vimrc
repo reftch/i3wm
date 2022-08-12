@@ -1,3 +1,55 @@
+call plug#begin("~/.vim/plugged")
+  
+  " Vim airline
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+
+  " Theme
+  Plug 'dracula/vim'
+
+  " File Explorer with Icons
+  Plug 'scrooloose/nerdtree'
+  Plug 'ryanoasis/vim-devicons'
+
+  " File Search
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+
+call plug#end()
+
+let g:airline_powerline_fonts = 1
+
+" Theme
+syntax enable
+colorscheme dracula
+
+" Nerd settings
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore = []
+let g:NERDTreeStatusline = ''
+let g:NERDTreeWinSize=50
+let g:NERDTreeMapOpenInTab='<TAB>'
+
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Toggle
+nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+
+" Searching
+nnoremap <C-p> :FZF<CR>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit'
+  \}
+" requires silversearcher-ag
+" used to ignore gitignore files
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+" Copy line down
+noremap <c-down> yyp
+
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 
@@ -35,11 +87,12 @@ set hlsearch
 
 set noswapfile
 
-" set number 
-set virtualedit=all
+set number 
+" set virtualedit=all
 
-set mouse=a                 " enable mouse click
-set clipboard=unnamedplus   " using system clipboard
+" Mouse support
+set ttymouse=xterm2
+set mouse=ar                 " enable mouse click
 
 let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
@@ -57,3 +110,17 @@ endfunction
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+" System clipboard support
+vnoremap <C-y> :w !xclip -selection clipboard<Cr><Cr>
+
+" Ctrl-S saving file
+inoremap <C-s> <Esc>:w<Cr>
+nnoremap <C-s> :w<Cr>
+
+nnoremap <silent> <C-m> :!make build<Cr> 
+
+
+
+
+

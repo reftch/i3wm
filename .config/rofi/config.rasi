@@ -2,7 +2,7 @@ configuration {
   display-drun: "Applications:";
   display-window: "Windows:";
   drun-display-format: "{name}";
-  font: "JetBrainsMono Nerd Font Medium 12";
+  font: "JetBrainsMono Nerd Font Medium 14";
   modi: "window,run,drun";
   show-icons: true;
   icon-theme: "Papirus";
@@ -27,6 +27,7 @@ configuration {
 
 window {
   width: 30%;
+  border-radius: 2;
 }
 
 element {
