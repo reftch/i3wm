@@ -1,6 +1,6 @@
-#!/bin(sh
+#!/bin/sh
 
-chosen=$(printf "Lock\nLogout\nRestart\nPower off\n" | rofi -dmenu -i -theme-str '@import "power.rasi"')
+chosen=$(printf "Lock\nLogout\nRestart\nPower off\n" | rofi -dmenu -i -theme-str '@import "session.rasi"')
 
 case "$chosen" in
   "Lock") i3lock -c 000000 ;;
